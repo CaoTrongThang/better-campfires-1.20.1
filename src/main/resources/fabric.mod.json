@@ -1,32 +1,32 @@
 {
 	"schemaVersion": 1,
-	"id": "healing-campfire",
-	"version": "${version}",
-	"name": "Healing Campfire",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"id": "campfirebuff",
+	"version": "0.1",
+	"name": "Campfire Buff",
+	"description": "Stay near campfires and It'll give you buff!",
 	"authors": [
-		"Me!"
+		"TrongThang"
 	],
 	"contact": {
 		"homepage": "",
 		"sources": ""
 	},
 	"license": "MIT",
-	"icon": "assets/healing-campfire/icon.png",
+	"icon": "assets/campfirebuff/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.trongthang.healingcampfire.HealingCampfire"
+			"com.trongthang.campfirebuff.CampfireBuff"
 		],
 		"client": [
-			"com.trongthang.healingcampfire.HealingCampfireClient"
+			"com.trongthang.campfirebuff.CampfireBuffClient"
 		],
 		"fabric-datagen": [
-			"com.trongthang.healingcampfire.HealingCampfireDataGenerator"
+			"com.trongthang.campfirebuff.CampfireBuffDataGenerator"
 		]
 	},
 	"mixins": [
-		"healing-campfire.mixins.json"
+		"campfirebuff.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",

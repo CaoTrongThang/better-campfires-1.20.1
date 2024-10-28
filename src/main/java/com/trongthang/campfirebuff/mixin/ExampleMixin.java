@@ -1,4 +1,4 @@
-package com.trongthang.healingcampfire.mixin;
+package com.trongthang.campfirebuff.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;
