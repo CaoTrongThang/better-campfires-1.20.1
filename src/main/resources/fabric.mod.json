@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "healing-campfire",
+	"version": "${version}",
+	"name": "Healing Campfire",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "",
+		"sources": ""
+	},
+	"license": "MIT",
+	"icon": "assets/healing-campfire/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.trongthang.healingcampfire.HealingCampfire"
+		],
+		"client": [
+			"com.trongthang.healingcampfire.HealingCampfireClient"
+		],
+		"fabric-datagen": [
+			"com.trongthang.healingcampfire.HealingCampfireDataGenerator"
+		]
+	},
+	"mixins": [
+		"healing-campfire.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.7",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
