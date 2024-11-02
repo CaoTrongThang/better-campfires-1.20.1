@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.block.Block;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
@@ -68,7 +69,7 @@ public class CampfireBuff implements ModInitializer {
 		// Check if the player is near a campfire
 		for (BlockPos pos : BlockPos.iterateOutwards(playerPos, ModConfig.getInstance().buffRadius,
 				ModConfig.getInstance().buffRadius, ModConfig.getInstance().buffRadius)) {
-			if (world.getBlockState(pos).getBlock() == campfireBlock) {
+			if (world.getBlockState(pos).getBlock() == campfireBlock && world.getBlockState(pos).get(CampfireBlock.LIT) == true) {
 				nearCampfire = true;
 				break;
 			}
