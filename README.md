@@ -5,10 +5,9 @@
 campfire_buffs.json
 ```
 {
-  //The campfire buff's radius, 5 blocks each direction
   "buff_radius": 5,
-  //Check every 1s = 20 Minecraft ticks, decrease this cost the game's performance
-  "check_interval": 20,
+  "check_interval": 30,
+  "require_lit_campfire": true,
   "buffs": [
     {
       "effect": "minecraft:regeneration",
@@ -22,3 +21,4 @@ campfire_buffs.json
     }
   ]
 }
+
