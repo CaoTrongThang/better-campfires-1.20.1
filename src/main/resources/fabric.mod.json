@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "campfirebuff",
-	"version": "0.1",
-	"name": "Campfire Buff",
-	"description": "Stay near campfires and It'll give you buff!",
+	"id": "campfirebuffs",
+	"version": "1.2",
+	"name": "Campfire Buffs",
+	"description": "Stay near campfires and It'll give you buffs!",
 	"authors": [
 		"TrongThang"
 	],
@@ -12,21 +12,15 @@
 		"sources": ""
 	},
 	"license": "MIT",
-	"icon": "assets/campfirebuff/icon.png",
+	"icon": "assets/campfirebuffs/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.trongthang.campfirebuff.CampfireBuff"
-		],
-		"client": [
-			"com.trongthang.campfirebuff.CampfireBuffClient"
-		],
-		"fabric-datagen": [
-			"com.trongthang.campfirebuff.CampfireBuffDataGenerator"
+			"com.trongthang.campfirebuffs.CampfireBuffs"
 		]
 	},
 	"mixins": [
-		"campfirebuff.mixins.json"
+		"campfirebuffs.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",
