@@ -1,6 +1,6 @@
-[**Cursed Forge Download**](https://www.curseforge.com/minecraft/mc-mods/campfire-buffs)
+[**Cursed Forge Download**](https://www.curseforge.com/minecraft/mc-mods/better-campfires)
 
-[**Modrinth Download**](https://modrinth.com/mod/campfire-buffs)
+[**Modrinth Download**](https://modrinth.com/mod/better-campfires)
 
 campfire_buffs.json
 ```
