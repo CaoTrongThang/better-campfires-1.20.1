@@ -29,7 +29,7 @@ public class CampfireBuffs implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModConfig.loadConfig();
-		cacheEffects();  // Cache the effects when initializing the mod
+		cacheEffects(); // Cache the effects when initializing the mod
 		LOGGER.info(MOD_ID + " has been initialized!");
 		ServerTickEvents.START_SERVER_TICK.register(this::onServerTick);
 	}
@@ -45,12 +45,12 @@ public class CampfireBuffs implements ModInitializer {
 	}
 
 	private void onServerTick(MinecraftServer server) {
-		tickCounter++;  // Increment the counter each tick
+		tickCounter++; // Increment the counter each tick
 
 		// Only apply healing every CHECK_INTERVAL ticks
 		if (tickCounter >= ModConfig.getInstance().checkInterval) {
 			applyBuffsToNearbyPlayers(server);
-			tickCounter = 0;  // Reset the counter after each interval
+			tickCounter = 0; // Reset the counter after each interval
 		}
 	}
 
@@ -66,41 +66,28 @@ public class CampfireBuffs implements ModInitializer {
 		BlockPos playerPos = player.getBlockPos();
 		boolean nearCampfire = false;
 
-		if(ModConfig.getInstance().requireLitCampfire){
-			// Check if the player is near a lit campfire
-			for (BlockPos pos : BlockPos.iterateOutwards(playerPos, ModConfig.getInstance().buffRadius,
-					ModConfig.getInstance().buffRadius, ModConfig.getInstance().buffRadius)) {
+		for (BlockPos pos : BlockPos.iterateOutwards(playerPos, ModConfig.getInstance().buffRadius,
+				ModConfig.getInstance().buffRadius, ModConfig.getInstance().buffRadius)) {
 
-				BlockState blockState = world.getBlockState(pos);
+			BlockState blockState = world.getBlockState(pos);
+			boolean isValidCampfire = ModConfig.getInstance().requireLitCampfire || blockState.get(CampfireBlock.LIT);
 
-				if (blockState.getBlock() instanceof CampfireBlock && blockState.get(CampfireBlock.LIT)) {
-					nearCampfire = true;
-					break;
-				}
-			}
-		} else {
-			// Check if the player is near any campfire
-			for (BlockPos pos : BlockPos.iterateOutwards(playerPos, ModConfig.getInstance().buffRadius,
-					ModConfig.getInstance().buffRadius, ModConfig.getInstance().buffRadius)) {
-
-				BlockState blockState = world.getBlockState(pos);
-
-				if (blockState.getBlock() instanceof CampfireBlock) {
-					nearCampfire = true;
-					break;
-				}
+			if (blockState.getBlock() instanceof CampfireBlock && isValidCampfire) {
+				nearCampfire = true;
+				break;
 			}
 		}
-
 
 		// Apply buffs if near a lit campfire
 		if (nearCampfire) {
 			for (ModConfig.BuffConfig buff : ModConfig.getInstance().buffs) {
-				StatusEffect effect = cachedEffects.get(buff.effect);  // Use cached effect
+				StatusEffect effect = cachedEffects.get(buff.effect); // Use cached effect
 				if (effect != null && !player.hasStatusEffect(effect)) {
-					player.addStatusEffect(new StatusEffectInstance(effect, buff.duration, buff.amplifier, false, true));
+					player.addStatusEffect(
+							new StatusEffectInstance(effect, buff.duration, buff.amplifier, false, true));
 				} else if (effect == null) {
-					LOGGER.warn("Warning: Effect " + buff.effect + " not found for player " + player.getName().getString());
+					LOGGER.warn(
+							"Warning: Effect " + buff.effect + " not found for player " + player.getName().getString());
 				}
 			}
 		}
