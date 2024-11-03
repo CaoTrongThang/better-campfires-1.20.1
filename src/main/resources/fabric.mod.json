@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"id": "campfirebuffs",
-	"version": "1.2",
-	"name": "Campfire Buffs",
-	"description": "Stay near campfires and It'll give you buffs!",
+	"id": "bettercampfires",
+	"version": "1.3",
+	"name": "Better Campfires",
+	"description": "Campfires can give buffs, cook,...!",
 	"authors": [
 		"TrongThang"
 	],
@@ -12,15 +12,15 @@
 		"sources": ""
 	},
 	"license": "MIT",
-	"icon": "assets/campfirebuffs/icon.png",
+	"icon": "assets/bettercampfires/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.trongthang.campfirebuffs.CampfireBuffs"
+			"com.trongthang.bettercampfires.BetterCampfires"
 		]
 	},
 	"mixins": [
-		"campfirebuffs.mixins.json"
+		"bettercampfires.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.7",
