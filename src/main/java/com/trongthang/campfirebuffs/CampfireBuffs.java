@@ -70,9 +70,7 @@ public class CampfireBuffs implements ModInitializer {
 				ModConfig.getInstance().buffRadius, ModConfig.getInstance().buffRadius)) {
 
 			BlockState blockState = world.getBlockState(pos);
-			boolean isValidCampfire = ModConfig.getInstance().requireLitCampfire || blockState.get(CampfireBlock.LIT);
-
-			if (blockState.getBlock() instanceof CampfireBlock && isValidCampfire) {
+			if (blockState.getBlock() instanceof CampfireBlock && (!ModConfig.getInstance().requireLitCampfire || blockState.get(CampfireBlock.LIT)) ) {
 				nearCampfire = true;
 				break;
 			}
