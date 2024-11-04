@@ -8,7 +8,7 @@
 
 [**Modrinth Download**](https://modrinth.com/mod/better-campfires)
 
-campfire_buffs.json
+Configuaration.json (No Supporting For Crafting Mod Items, Hope Someone Can Make A Pull Request <3)
 ```
 {
   "campfires_can_buff": true,
