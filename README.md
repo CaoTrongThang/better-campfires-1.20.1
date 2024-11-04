@@ -1,5 +1,7 @@
 # Better Campfires🔥
 
+*I'm not really into fixing the mod, I made this mod for my modpack, so I hope you all don't get any issues.*
+
 **Better Campfires** is a Minecraft mod that enhances the functionality of campfires, allowing players to cook a wider variety of food items and enjoy additional buffs from campfires. This mod aims to improve the campfire experience in your Minecraft world, making it more versatile and enjoyable.
 
 [**Cursed Forge Download**](https://www.curseforge.com/minecraft/mc-mods/better-campfires)
