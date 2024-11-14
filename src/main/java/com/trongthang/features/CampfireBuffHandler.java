@@ -1,5 +1,6 @@
-package com.trongthang.bettercampfires;
+package com.trongthang.features;
 
+import com.trongthang.bettercampfires.ModConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.effect.StatusEffect;

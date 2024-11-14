@@ -24,6 +24,18 @@ public class ModConfig {
     private static ModConfig INSTANCE;
 
     @Expose
+    @SerializedName("campfires_can_burn_out")
+    public boolean campfiresCanBurnOut = true;
+
+    @Expose
+    @SerializedName("campfires_burn_out_time")
+    public int campfiresBurnOutTime = 600;
+
+    @Expose
+    @SerializedName("campfires_extinguish_by_rain")
+    public boolean campfiresExtinguishByRain = true;
+
+    @Expose
     @SerializedName("campfires_can_buff")
     public boolean campfiresCanBuff = true;
 

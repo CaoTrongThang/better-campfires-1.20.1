@@ -1,5 +1,6 @@
-package com.trongthang.bettercampfires;
+package com.trongthang.features;
 
+import com.trongthang.bettercampfires.ModConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
@@ -67,6 +68,8 @@ public class CampfireCookHandler {
     }
 
     private void cookItem(ItemEntity itemEntity, ModConfig.CookableItem cookableItem) {
+
+
         itemEntity.setStack(new ItemStack(cookableItem.cookedItem, itemEntity.getStack().getCount()));
         dropTimes.remove(itemEntity);
     }

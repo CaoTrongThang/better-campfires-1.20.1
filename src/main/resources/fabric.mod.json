@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
 	"id": "bettercampfires",
-	"version": "1.3",
+	"version": "1.5",
 	"name": "Better Campfires",
-	"description": "Campfires can give buffs, cook,...!",
+"description": "Campfires can give buffs, cook, burnt out, affected by rains...!",
 	"authors": [
 		"TrongThang"
 	],
