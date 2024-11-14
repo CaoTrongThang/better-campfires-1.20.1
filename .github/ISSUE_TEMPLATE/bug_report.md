@@ -7,7 +7,8 @@ assignees: CaoTrongThang
 
 ---
 
-**Must sure you're using the latest version of the mod**
+**Are you sure you're using the latest version of the mod?**
+hope it's a yes
 
 **Describe the bug**
 A clear and concise description of what the bug is.
