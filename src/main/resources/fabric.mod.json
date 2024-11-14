@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"com.trongthang.bettercampfires.BetterCampfires"
+		],
+		"client": [
+			"com.trongthang.bettercampfires.client.BetterCampfiresClient"
 		]
 	},
 	"mixins": [

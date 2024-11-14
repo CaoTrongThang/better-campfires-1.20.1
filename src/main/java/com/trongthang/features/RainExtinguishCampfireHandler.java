@@ -1,6 +1,7 @@
 package com.trongthang.features;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.world.ServerWorld;
@@ -24,17 +25,19 @@ public class RainExtinguishCampfireHandler {
 
         for(BlockPos key : campfiresList.keySet()){
             BlockState state = world.getBlockState(key);
-            var checkUp = upDistance - key.getY();
-            var b = false;
-            for(int x = 1; x < checkUp; x++){
-                if (!world.getBlockState(key.up(x)).isAir()) {
-                    b = true;
-                    break;
+            if(state.getBlock() instanceof CampfireBlock) {
+                var checkUp = upDistance - key.getY();
+                var b = false;
+                for(int x = 1; x < checkUp; x++){
+                    if (!world.getBlockState(key.up(x)).isAir()) {
+                        b = true;
+                        break;
+                    }
                 }
-            }
-            if(!b){
-                world.setBlockState(key, state.with(CampfireBlock.LIT, false), 3);
-                campfiresList.remove(key);
+                if(!b){
+                    world.setBlockState(key, state.with(CampfireBlock.LIT, false), 3);
+                    campfiresList.remove(key);
+                }
             }
         }
     }

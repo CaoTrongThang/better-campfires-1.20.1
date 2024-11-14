@@ -23,7 +23,7 @@ public class WorldMixin {
             World world = (World) (Object) this;
             BlockState oldState = world.getBlockState(pos);
 
-            if (oldState.getBlock() == Blocks.CAMPFIRE || newState.getBlock() == Blocks.CAMPFIRE) {
+            if (oldState.getBlock() instanceof CampfireBlock || newState.getBlock() instanceof CampfireBlock) {
                 boolean wasLit = oldState.contains(CampfireBlock.LIT) && oldState.get(CampfireBlock.LIT);
                 boolean isNowLit = newState.contains(CampfireBlock.LIT) && newState.get(CampfireBlock.LIT);
 

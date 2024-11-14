@@ -67,7 +67,11 @@ public class DataHandler {
     // Save the campfire data
     public void saveCampfiresData() {
         LOGGER.info("Saving campfire data to: {}", saveFilePath);
-
+        for(BlockPos key : campfiresList.keySet()){
+            if(campfiresList.get(key).time <= 0){
+                campfiresList.remove(key);
+            }
+        }
         try {
             Files.createDirectories(saveFilePath.getParent());
             try (Writer writer = Files.newBufferedWriter(saveFilePath)) {

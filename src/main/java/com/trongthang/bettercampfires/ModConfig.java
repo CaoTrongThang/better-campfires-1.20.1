@@ -29,7 +29,7 @@ public class ModConfig {
 
     @Expose
     @SerializedName("campfires_burn_out_time")
-    public int campfiresBurnOutTime = 600;
+    public int campfiresBurnOutTime = 1200;
 
     @Expose
     @SerializedName("campfires_extinguish_by_rain")
@@ -84,6 +84,21 @@ public class ModConfig {
             new ItemCanCook("minecraft:grass_block", 200, "minecraft:dirt") // Not typically cooked, just for fun.
     );
 
+    @Expose
+    @SerializedName("campfire_fuels")
+    public List<CampfireFuels> campfireFuels = List.of(
+            new CampfireFuels("minecraft:oak_log", 120),        // Oak Log
+            new CampfireFuels("minecraft:stick", 40),           // Stick
+            new CampfireFuels("minecraft:birch_log", 120),      // Birch Log
+            new CampfireFuels("minecraft:spruce_log", 120),     // Spruce Log
+            new CampfireFuels("minecraft:jungle_log", 120),     // Jungle Log
+            new CampfireFuels("minecraft:acacia_log", 120),     // Acacia Log
+            new CampfireFuels("minecraft:dark_oak_log", 120),   // Dark Oak Log
+            new CampfireFuels("minecraft:coal", 160),           // Coal (common fuel)
+            new CampfireFuels("minecraft:charcoal", 160),       // Charcoal (also commonly used as fuel)
+            new CampfireFuels("minecraft:coal_block", 1440)
+    );
+
     public List<CookableItem> cookableItems = new ArrayList<>();
 
     public static class BuffConfig {
@@ -125,6 +140,19 @@ public class ModConfig {
             this.rawItem = rawItem;
             this.cookTime = cookTime;
             this.cookedItem = cookedItem;
+        }
+    }
+
+    public static class CampfireFuels {
+        @Expose
+        public String fuelId;    // Unique ID for the fuel item
+        @Expose
+        public int addBurnTime;     // Burn time in seconds
+
+        // Constructor
+        public CampfireFuels(String fuelId, int addBurnTime) {
+            this.fuelId = fuelId;
+            this.addBurnTime = addBurnTime;
         }
     }
 
