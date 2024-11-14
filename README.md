@@ -32,7 +32,7 @@ _After changing the config, you need to restart the game to apply new changes._
 ```json
 {
   "campfires_can_burn_out": true,
-  "campfires_burn_out_time": 200,
+  "campfires_burn_out_time": 1200,
   "campfires_extinguish_by_rain": true,
   "campfires_can_buff": true,
   "buff_radius": 6,
@@ -98,6 +98,48 @@ _After changing the config, you need to restart the game to apply new changes._
       "rawItem": "minecraft:grass_block",
       "cookTime": 200,
       "cookedItem": "minecraft:dirt"
+    }
+  ],
+  "campfire_fuels": [
+    {
+      "fuelId": "minecraft:oak_log",
+      "addBurnTime": 120
+    },
+    {
+      "fuelId": "minecraft:stick",
+      "addBurnTime": 40
+    },
+    {
+      "fuelId": "minecraft:birch_log",
+      "addBurnTime": 120
+    },
+    {
+      "fuelId": "minecraft:spruce_log",
+      "addBurnTime": 120
+    },
+    {
+      "fuelId": "minecraft:jungle_log",
+      "addBurnTime": 120
+    },
+    {
+      "fuelId": "minecraft:acacia_log",
+      "addBurnTime": 120
+    },
+    {
+      "fuelId": "minecraft:dark_oak_log",
+      "addBurnTime": 120
+    },
+    {
+      "fuelId": "minecraft:coal",
+      "addBurnTime": 160
+    },
+    {
+      "fuelId": "minecraft:charcoal",
+      "addBurnTime": 160
+    },
+    {
+      "fuelId": "minecraft:coal_block",
+      "addBurnTime": 1440
     }
   ]
 }

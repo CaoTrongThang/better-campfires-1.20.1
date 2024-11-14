@@ -34,7 +34,6 @@ public class CampfireBlockMixin {
             // Strip "item.minecraft." or "block.minecraft." and ensure it matches "minecraft:item_id" or "minecraft:block_id"
             String itemId = fuelId.replace("item.minecraft.", "minecraft:").replace("block.minecraft.", "minecraft:");
 
-
             boolean fuelFound = false; // Flag to track if we found the fuel
             for (ModConfig.CampfireFuels fuel : ModConfig.getInstance().campfireFuels) {
                 if (fuel.fuelId.equals(itemId)) {
@@ -60,11 +59,6 @@ public class CampfireBlockMixin {
                     }
                     break; // Exit the loop once the fuel is found
                 }
-            }
-
-            // If no fuel is found, you could log a message or handle it accordingly
-            if (!fuelFound) {
-                LOGGER.info("Fuel not found in config for item: " + itemId);
             }
         }
     }
