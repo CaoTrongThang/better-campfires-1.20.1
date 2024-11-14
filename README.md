@@ -143,3 +143,7 @@ _After changing the config, you need to restart the game to apply new changes._
     }
   ]
 }
+```
+**[Modrinth Download](https://modrinth.com/mod/better-campfires)**
+
+**[CursedForge Download](https://www.curseforge.com/minecraft/mc-mods/better-campfires)**
