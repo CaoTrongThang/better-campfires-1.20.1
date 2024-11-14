@@ -1,7 +1,7 @@
 🔥Better Campfires🔥
 ====================
 
-**Better Campfires** is a Minecraft mod designed to improve the campfire mechanics, making them more versatile and interactive for players. It introduces a variety of new features to enhance gameplay, including expanded cooking options, buffs, and more realistic campfires, fully configurable!.
+**Better Campfires** is a Minecraft mod designed to improve the campfire mechanics, making them more versatile and interactive for players. It introduces a variety of new features to enhance gameplay, including expanded cooking options, buffs, and more realistic campfires, which are fully configurable!
 
 Features
 --------
