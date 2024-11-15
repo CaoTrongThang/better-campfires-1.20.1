@@ -32,7 +32,7 @@ public class DataHandler {
 
     // Initialize the world data and set up file path for saving/loading
     public void initializeWorldData(MinecraftServer server) {
-        saveFilePath = server.getSavePath(WorldSavePath.PLAYERDATA).resolve("campfiresList.json");
+        saveFilePath = server.getSavePath(WorldSavePath.ROOT).resolve("data/campfiresList.json");
         loadCampfiresData();
     }
 
