@@ -25,6 +25,11 @@ public class RainExtinguishCampfireHandler {
 
         for(BlockPos key : campfiresList.keySet()){
             BlockState state = world.getBlockState(key);
+
+            if(state.isAir()) {
+                campfiresList.remove(key);
+            }
+
             if(state.getBlock() instanceof CampfireBlock) {
                 var checkUp = upDistance - key.getY();
                 var b = false;
@@ -35,8 +40,8 @@ public class RainExtinguishCampfireHandler {
                     }
                 }
                 if(!b){
-                    world.setBlockState(key, state.with(CampfireBlock.LIT, false), 3);
-                    campfiresList.remove(key);
+                        world.setBlockState(key, state.with(CampfireBlock.LIT, false), 3);
+                        campfiresList.remove(key);
                 }
             }
         }

@@ -84,7 +84,7 @@ public class CampfireCookHandler {
                     mutablePos.set(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                     BlockState state = world.getBlockState(mutablePos);
 
-                    if (state.isOf(Blocks.CAMPFIRE) && (!config.requireLitCampfire || state.get(CampfireBlock.LIT))) {
+                    if (state.isOf(Blocks.CAMPFIRE) && state.get(CampfireBlock.LIT)) {
                         return true;
                     }
                 }

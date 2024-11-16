@@ -5,7 +5,7 @@
 	"mixins": [
 		"ExampleMixin",
 		"WorldMixin",
-		"CampfireBlockMixin"
+		"CampfireBlockFuel"
 	],
 	"injectors": {
 		"defaultRequire": 1

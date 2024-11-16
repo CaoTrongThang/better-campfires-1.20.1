@@ -36,7 +36,7 @@ public class BetterCampfires implements ModInitializer {
 		LOGGER.info(MOD_ID + " has been initialized!");
 
 		ServerLifecycleEvents.SERVER_STARTING.register((t) -> {
-			dataHandler.initializeWorldData(t);
+			dataHandler.initializeCampfiresData(t);
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPING.register((t) -> {

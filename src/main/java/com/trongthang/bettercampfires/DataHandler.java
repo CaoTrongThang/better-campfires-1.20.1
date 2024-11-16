@@ -31,7 +31,7 @@ public class DataHandler {
     public Path saveFilePath;
 
     // Initialize the world data and set up file path for saving/loading
-    public void initializeWorldData(MinecraftServer server) {
+    public void initializeCampfiresData(MinecraftServer server) {
         saveFilePath = server.getSavePath(WorldSavePath.ROOT).resolve("data/campfiresList.json");
         loadCampfiresData();
     }
@@ -57,16 +57,16 @@ public class DataHandler {
                         }
                     }
                 }
-                LOGGER.info("Loaded {} campfire positions from data file.", campfiresList.size());
+                Utils.log("Loaded {} campfire positions from data file." + campfiresList.size());
             } catch (IOException e) {
-                LOGGER.error("Failed to load campfire data", e);
+                Utils.log("Failed to load campfire data " + e);
             }
         }
     }
 
     // Save the campfire data
     public void saveCampfiresData() {
-        LOGGER.info("Saving campfire data to: {}", saveFilePath);
+        Utils.log("Saving campfire data to: {}" + saveFilePath);
         for(BlockPos key : campfiresList.keySet()){
             if(campfiresList.get(key).time <= 0){
                 campfiresList.remove(key);

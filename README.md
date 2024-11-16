@@ -8,14 +8,15 @@ Features
 
 *   **Cooking Around Campfires**: Cook various raw items into their cooked counterparts using campfires.
 *   **Custom Buffs**: Receive buffs when near a campfire, adding a strategic element to survival gameplay.
-*   **Rains Can Extinguish Campfires**: Rains now can extinguish the campfires
-*   **Campfires Burn Out**: Campfires is burnt out after a certain time
-*   **Campfire Fuels**: Fuels to make your campfire burn longer (works if Campfires Burn Out is enabled)
+*   **Rains Can Extinguish Campfires**: Rains now can extinguish the campfires.
+*   **Campfires Burn Out**: Campfires is burnt out after a certain time.
+*   **Campfires Burn Hostile Mobs**: Campfires now can burn hostile mobs.
+*   **Campfire Fuels**: Fuels to make your campfire burn longer. (works if Campfires Burn Out is enabled)
 *   **Configurable Options**: Easily customize which items can be cooked and the buffs that are applied via a configuration file.
 
 **Giving Buffs:** ![so many buffs!](https://cdn.modrinth.com/data/cached_images/b7cfa027825e822d804c57a6d1d44ad21bdf8978.png)
 
-**Cooking Near Items:**
+**Cooking Items:**
 
 ![cookingthings](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHRqaTM2MGdoZjBwbGU5ZmlxN3U1MzFndWR4bWZnYjA0ZzJya2J4ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SUFaZLbzaZLWEseMdq/giphy-downsized-large.gif)
 
@@ -32,15 +33,17 @@ _After changing the config, you need to restart the game to apply new changes._
 ```json
 {
   "campfires_can_burn_out": true,
-  "campfires_burn_out_time": 1200,
+  "campfires_burn_out_time": 3600,
   "campfires_extinguish_by_rain": true,
   "campfires_can_buff": true,
-  "buff_radius": 6,
+  "campfires_can_buff_for_non_hostile_mobs": true,
+  "campfires_can_buff_for_hostile_mobs": true,
+  "campfires_can_burn_hostile_mobs_based_on_buff_radius": false,
+  "buff_radius": 7,
   "buff_check_interval": 30,
   "campfires_can_cook": true,
   "cook_radius": 4,
   "cook_check_interval": 20,
-  "require_lit_campfire": true,
   "buffs": [
     {
       "effect": "minecraft:regeneration",
@@ -102,44 +105,68 @@ _After changing the config, you need to restart the game to apply new changes._
   ],
   "campfire_fuels": [
     {
-      "fuelId": "minecraft:oak_log",
-      "addBurnTime": 120
+      "fuelId": "minecraft:stick",
+      "addBurnTime": 100
     },
     {
-      "fuelId": "minecraft:stick",
-      "addBurnTime": 40
+      "fuelId": "minecraft:oak_log",
+      "addBurnTime": 800
     },
     {
       "fuelId": "minecraft:birch_log",
-      "addBurnTime": 120
+      "addBurnTime": 800
     },
     {
       "fuelId": "minecraft:spruce_log",
-      "addBurnTime": 120
+      "addBurnTime": 800
     },
     {
       "fuelId": "minecraft:jungle_log",
-      "addBurnTime": 120
+      "addBurnTime": 800
     },
     {
       "fuelId": "minecraft:acacia_log",
-      "addBurnTime": 120
+      "addBurnTime": 800
     },
     {
       "fuelId": "minecraft:dark_oak_log",
-      "addBurnTime": 120
+      "addBurnTime": 800
+    },
+    {
+      "fuelId": "minecraft:oak_planks",
+      "addBurnTime": 200
+    },
+    {
+      "fuelId": "minecraft:birch_planks",
+      "addBurnTime": 200
+    },
+    {
+      "fuelId": "minecraft:spruce_planks",
+      "addBurnTime": 200
+    },
+    {
+      "fuelId": "minecraft:jungle_planks",
+      "addBurnTime": 200
+    },
+    {
+      "fuelId": "minecraft:acacia_planks",
+      "addBurnTime": 200
+    },
+    {
+      "fuelId": "minecraft:dark_oak_planks",
+      "addBurnTime": 200
     },
     {
       "fuelId": "minecraft:coal",
-      "addBurnTime": 160
+      "addBurnTime": 1200
     },
     {
       "fuelId": "minecraft:charcoal",
-      "addBurnTime": 160
+      "addBurnTime": 1200
     },
     {
       "fuelId": "minecraft:coal_block",
-      "addBurnTime": 1440
+      "addBurnTime": 9600
     }
   ]
 }

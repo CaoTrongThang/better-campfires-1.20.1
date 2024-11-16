@@ -29,7 +29,7 @@ public class ModConfig {
 
     @Expose
     @SerializedName("campfires_burn_out_time")
-    public int campfiresBurnOutTime = 1200;
+    public int campfiresBurnOutTime = 3600;
 
     @Expose
     @SerializedName("campfires_extinguish_by_rain")
@@ -40,8 +40,20 @@ public class ModConfig {
     public boolean campfiresCanBuff = true;
 
     @Expose
+    @SerializedName("campfires_can_buff_for_non_hostile_mobs")
+    public boolean campfiresCanBuffForNonHostileMobs = true;
+
+    @Expose
+    @SerializedName("campfires_can_buff_for_hostile_mobs")
+    public boolean campfiresCanBuffForHostileMobs = true;
+
+    @Expose
+    @SerializedName("campfires_can_burn_hostile_mobs_based_on_buff_radius")
+    public boolean campfiresCanBurnHostileMobsBasedOnBuffRadius = false;
+
+    @Expose
     @SerializedName("buff_radius")
-    public int buffRadius = 6;
+    public int buffRadius = 7;
 
     @Expose
     @SerializedName("buff_check_interval")
@@ -58,10 +70,6 @@ public class ModConfig {
     @Expose
     @SerializedName("cook_check_interval")
     public int cookCheckInterval = 20;
-
-    @Expose
-    @SerializedName("require_lit_campfire")
-    public boolean requireLitCampfire = true;
 
     @Expose
     @SerializedName("buffs")
@@ -87,16 +95,22 @@ public class ModConfig {
     @Expose
     @SerializedName("campfire_fuels")
     public List<CampfireFuels> campfireFuels = List.of(
-            new CampfireFuels("minecraft:oak_log", 120),        // Oak Log
-            new CampfireFuels("minecraft:stick", 40),           // Stick
-            new CampfireFuels("minecraft:birch_log", 120),      // Birch Log
-            new CampfireFuels("minecraft:spruce_log", 120),     // Spruce Log
-            new CampfireFuels("minecraft:jungle_log", 120),     // Jungle Log
-            new CampfireFuels("minecraft:acacia_log", 120),     // Acacia Log
-            new CampfireFuels("minecraft:dark_oak_log", 120),   // Dark Oak Log
-            new CampfireFuels("minecraft:coal", 160),           // Coal (common fuel)
-            new CampfireFuels("minecraft:charcoal", 160),       // Charcoal (also commonly used as fuel)
-            new CampfireFuels("minecraft:coal_block", 1440)
+            new CampfireFuels("minecraft:stick", 100),
+            new CampfireFuels("minecraft:oak_log", 800),
+            new CampfireFuels("minecraft:birch_log", 800),
+            new CampfireFuels("minecraft:spruce_log", 800),
+            new CampfireFuels("minecraft:jungle_log", 800),
+            new CampfireFuels("minecraft:acacia_log", 800),
+            new CampfireFuels("minecraft:dark_oak_log", 800),
+            new CampfireFuels("minecraft:oak_planks", 200),
+            new CampfireFuels("minecraft:birch_planks", 200),
+            new CampfireFuels("minecraft:spruce_planks", 200),
+            new CampfireFuels("minecraft:jungle_planks", 200),
+            new CampfireFuels("minecraft:acacia_planks", 200),
+            new CampfireFuels("minecraft:dark_oak_planks", 200),
+            new CampfireFuels("minecraft:coal", 1200),
+            new CampfireFuels("minecraft:charcoal", 1200),
+            new CampfireFuels("minecraft:coal_block", 9600)
     );
 
     public List<CookableItem> cookableItems = new ArrayList<>();
@@ -189,11 +203,11 @@ public class ModConfig {
 
             // Improved logging for non-existing items
             if (rawItem == Items.AIR) {
-                BetterCampfires.LOGGER.warn(BetterCampfires.MOD_ID + " - Raw item not found in registry: " + rawItemId + " | This mod currently only works with Vanilla items, not items from other mods.");
+                Utils.log(BetterCampfires.MOD_ID + " - Raw item not found in registry: " + rawItemId + " | This mod currently only works with Vanilla items, not items from other mods.");
                 continue; // Skip if raw item does not exist
             }
             if (cookedItem == Items.AIR) {
-                BetterCampfires.LOGGER.warn(BetterCampfires.MOD_ID + " - Cooked item not found in registry: " + cookedItemId + " | This mod currently only works with Vanilla items, not items from other mods.");
+                Utils.log(BetterCampfires.MOD_ID + " - Cooked item not found in registry: " + cookedItemId + " | This mod currently only works with Vanilla items, not items from other mods.");
                 continue; // Skip if cooked item does not exist
             }
 
@@ -202,7 +216,7 @@ public class ModConfig {
                 cookableItems.add(new CookableItem(rawItem, cookedItem, item.cookTime));
                 BetterCampfires.LOGGER.info(BetterCampfires.MOD_ID + " - from " + rawItem + " to " + cookedItem + " in " + item.cookTime + " ticks");
             } else {
-                BetterCampfires.LOGGER.warn(BetterCampfires.MOD_ID + " - Duplicate raw item found: " + rawItem + ". Skipping.");
+                Utils.log(BetterCampfires.MOD_ID + " - Duplicate raw item found: " + rawItem + ". Skipping.");
             }
         }
     }
