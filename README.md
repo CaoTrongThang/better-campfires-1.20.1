@@ -7,7 +7,8 @@ Features
 --------
 
 *   **Cooking Around Campfires**: Cook various raw items into their cooked counterparts using campfires.
-*   **Custom Buffs**: Receive buffs when near a campfire, adding a strategic element to survival gameplay.
+*   **Custom Buffs For Players**: Players receive buffs when near a campfire, adding a strategic element to survival gameplay.
+*   **Custom Buffs For Hostile Mobs**: You can add debuffs or buffs for hostile mobs.
 *   **Rains Can Extinguish Campfires**: Rains now can extinguish the campfires.
 *   **Campfires Burn Out**: Campfires are burnt out after a certain time.
 *   **Campfires Burn Hostile Mobs**: Campfires now can burn hostile mobs.

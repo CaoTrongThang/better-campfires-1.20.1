@@ -81,7 +81,7 @@ public class ModConfig {
     @Expose
     @SerializedName("hostile_mob_buffs")
     public List<BuffConfig> hostileMobBuffs = List.of(
-            new BuffConfig("minecraft:weakness", 100, 128),
+            new BuffConfig("minecraft:weakness", 100, 0),
             new BuffConfig("minecraft:slowness", 100, 0)
     );
 

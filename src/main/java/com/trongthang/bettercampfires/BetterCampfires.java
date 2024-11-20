@@ -5,6 +5,7 @@ import com.trongthang.features.CampfireBurnOutHandler;
 import com.trongthang.features.CampfireCookHandler;
 import com.trongthang.features.RainExtinguishCampfireHandler;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.MinecraftServer;
