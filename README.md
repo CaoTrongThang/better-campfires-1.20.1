@@ -39,7 +39,7 @@ _After changing the config, you need to restart the game to apply new changes._
   "campfires_can_buff": true,
   "campfires_can_buff_for_non_hostile_mobs": true,
   "campfires_can_buff_for_hostile_mobs": true,
-  "campfires_can_burn_hostile_mobs_based_on_buff_radius": false,
+  "campfires_can_burn_hostile_mobs_based_on_buff_radius": true,
   "buff_radius": 7,
   "buff_check_interval": 30,
   "campfires_can_cook": true,
@@ -54,6 +54,18 @@ _After changing the config, you need to restart the game to apply new changes._
     {
       "effect": "minecraft:resistance",
       "duration": 200,
+      "amplifier": 0
+    }
+  ],
+  "hostile_mob_buffs": [
+    {
+      "effect": "minecraft:weakness",
+      "duration": 100,
+      "amplifier": 0
+    },
+    {
+      "effect": "minecraft:slowness",
+      "duration": 100,
       "amplifier": 0
     }
   ],
