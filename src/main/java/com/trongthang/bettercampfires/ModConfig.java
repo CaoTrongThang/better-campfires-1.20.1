@@ -49,7 +49,7 @@ public class ModConfig {
 
     @Expose
     @SerializedName("campfires_can_burn_hostile_mobs_based_on_buff_radius")
-    public boolean campfiresCanBurnHostileMobsBasedOnBuffRadius = false;
+    public boolean campfiresCanBurnHostileMobsBasedOnBuffRadius = true;
 
     @Expose
     @SerializedName("buff_radius")
@@ -76,6 +76,13 @@ public class ModConfig {
     public List<BuffConfig> buffs = List.of(
             new BuffConfig("minecraft:regeneration", 200, 0),
             new BuffConfig("minecraft:resistance", 200, 0)
+    );
+
+    @Expose
+    @SerializedName("hostile_mob_buffs")
+    public List<BuffConfig> hostileMobBuffs = List.of(
+            new BuffConfig("minecraft:weakness", 100, 128),
+            new BuffConfig("minecraft:slowness", 100, 0)
     );
 
     @Expose

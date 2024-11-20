@@ -8,8 +8,8 @@
 		"TrongThang"
 	],
 	"contact": {
-		"homepage": "",
-		"sources": ""
+		"homepage": "https://modrinth.com/mod/better-campfires",
+		"sources": "https://github.com/CaoTrongThang/better-campfires-1.20.1"
 	},
 	"license": "MIT",
 	"icon": "assets/bettercampfires/icon.png",

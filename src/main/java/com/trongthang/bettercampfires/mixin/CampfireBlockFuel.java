@@ -52,7 +52,6 @@ public class CampfireBlockFuel {
                         ServerPlayNetworking.send(player.getServer().getPlayerManager().getPlayer(player.getUuid()), PLAY_BLOCK_LAVA_EXTINGUISH, PacketByteBufs.empty());
 
 
-
                         // Set the return value to indicate success
                         cir.setReturnValue(ActionResult.SUCCESS);
                         cir.cancel();
