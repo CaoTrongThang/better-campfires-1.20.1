@@ -6,13 +6,13 @@
 Features
 --------
 
-*   **Cooking Around Campfires**: Cook various raw items into their cooked counterparts using campfires.
 *   **Custom Buffs For Players**: Players receive buffs when near a campfire, adding a strategic element to survival gameplay.
 *   **Custom Buffs For Hostile Mobs**: You can add debuffs or buffs for hostile mobs.
 *   **Rains Can Extinguish Campfires**: Rains now can extinguish the campfires.
 *   **Campfires Burn Out**: Campfires are burnt out after a certain time.
 *   **Campfires Burn Hostile Mobs**: Campfires now can burn hostile mobs.
 *   **Campfire Fuels**: Fuels to make your campfire burn longer. (works if Campfires Burn Out is enabled)
+*   **Cooking Around Campfires**: Cook various raw items into their cooked counterparts using campfires.
 *   **Configurable Options**: Easily customize which items can be cooked and the buffs that are applied via a configuration file.
 
 **Giving Buffs:** ![so many buffs!](https://cdn.modrinth.com/data/cached_images/b7cfa027825e822d804c57a6d1d44ad21bdf8978.png)
