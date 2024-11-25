@@ -58,7 +58,7 @@ public class GetCampfireBurnTimeLeft {
             if (campfire != null) {
                 // Only send the message from the server side
                 if (!world.isClient) {
-                    if(player.getPose() != EntityPose.CROUCHING){
+                    if(player.getPose() != EntityPose.CROUCHING && player.getMainHandStack().isEmpty()){
                         counter++;
                         if((counter % 2) == 1){
                             String randomMessage = messages.get(rand.nextInt(messages.size()));
