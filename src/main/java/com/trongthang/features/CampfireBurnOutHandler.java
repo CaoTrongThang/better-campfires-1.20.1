@@ -1,33 +1,34 @@
 package com.trongthang.features;
 
-import com.trongthang.bettercampfires.CooldownTick;
-import com.trongthang.bettercampfires.Utils;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
-import static com.trongthang.bettercampfires.BetterCampfires.LOGGER;
 import static com.trongthang.bettercampfires.BetterCampfires.campfiresList;
 
 public class CampfireBurnOutHandler {
 
-    CooldownTick cooldownTick = new CooldownTick(20);
+    int checkInterval = 60;
+    int counter = 0;
 
     public void onServerTick(ServerWorld world) {
 
-        cooldownTick.update();
-        if(cooldownTick.isCooldown()) return;
-        cooldownTick.reset();
+        counter++;
+        if(counter < checkInterval) return;
+        counter = 0;
 
         for(BlockPos key : campfiresList.keySet()) {
             var campfireCooldown = campfiresList.get(key);
-            campfireCooldown.update(cooldownTick.checkInterval);
+            campfireCooldown.update(checkInterval);
         }
 
         for (BlockPos key : campfiresList.keySet()) {
-
             var campfireCooldown = campfiresList.get(key);
             BlockState state = world.getBlockState(key);
 

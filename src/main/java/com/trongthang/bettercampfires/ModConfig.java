@@ -28,8 +28,12 @@ public class ModConfig {
     public boolean campfiresCanBurnOut = true;
 
     @Expose
+    @SerializedName("can_check_burn_out_time_left")
+    public boolean canCheckBurnOutTimeLeft = true;
+
+    @Expose
     @SerializedName("campfires_burn_out_time")
-    public int campfiresBurnOutTime = 3600;
+    public int campfiresBurnOutTime = 7200;
 
     @Expose
     @SerializedName("campfires_extinguish_by_rain")

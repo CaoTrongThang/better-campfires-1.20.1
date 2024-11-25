@@ -1,5 +1,8 @@
 package com.trongthang.bettercampfires;
 
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+
 import static com.mojang.text2speech.Narrator.LOGGER;
 
 public class Utils {

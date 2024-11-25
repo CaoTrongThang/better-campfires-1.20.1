@@ -34,6 +34,7 @@ _After changing the config, you need to restart the game to apply new changes._
 ```json
 {
   "campfires_can_burn_out": true,
+  "can_check_burn_out_time_left": true,
   "campfires_burn_out_time": 3600,
   "campfires_extinguish_by_rain": true,
   "campfires_can_buff": true,

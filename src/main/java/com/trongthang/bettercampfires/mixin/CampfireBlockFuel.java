@@ -44,7 +44,7 @@ public class CampfireBlockFuel {
 
                         // Update the campfire's cooldown list
                         campfiresList.computeIfPresent(pos, (p, cooldown) -> {
-                            cooldown.time += fuelTime;
+                            cooldown.timeLeft += fuelTime;
                             return cooldown;
                         });
 

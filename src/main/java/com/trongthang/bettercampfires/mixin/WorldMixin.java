@@ -1,6 +1,6 @@
 package com.trongthang.bettercampfires.mixin;
 
-import com.trongthang.bettercampfires.CooldownTick;
+import com.trongthang.bettercampfires.CampfireInfo;
 import com.trongthang.bettercampfires.ModConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,7 +29,7 @@ public class WorldMixin {
 
                 // Detect if the campfire was just lit
                 if (!wasLit && isNowLit) {
-                    campfiresList.put(pos, new CooldownTick(ModConfig.getInstance().campfiresBurnOutTime));
+                    campfiresList.put(pos, new CampfireInfo());
                 }
 
                 // Detect if the campfire was just extinguished
@@ -47,7 +47,7 @@ public class WorldMixin {
             // Detect block placement (old block state is air or if the old block was snow)
             else if (!newState.isAir() && (oldState.isAir() || oldState.getBlock() == Blocks.SNOW || oldState.getBlock() == Blocks.GRASS)) {
                 if(newState.getBlock() == Blocks.CAMPFIRE) {
-                    campfiresList.put(pos, new CooldownTick(ModConfig.getInstance().campfiresBurnOutTime));
+                    campfiresList.put(pos, new CampfireInfo());
                 }
             }
         }
