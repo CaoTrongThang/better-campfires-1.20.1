@@ -51,7 +51,6 @@ public class GetCampfireBurnTimeLeft {
     }
 
     private ActionResult onRightClickBlock(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
-
         // Check if the block the player right-clicked is a Campfire
         if (world.getBlockState(hitResult.getBlockPos()).getBlock() instanceof CampfireBlock) {
             CampfireInfo campfire = campfiresList.get(hitResult.getBlockPos());
@@ -72,8 +71,6 @@ public class GetCampfireBurnTimeLeft {
                         } else {
                             counter = 0;
                         }
-
-
                     }
                 }
             }

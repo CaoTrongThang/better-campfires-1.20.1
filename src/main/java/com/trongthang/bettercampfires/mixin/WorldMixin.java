@@ -19,7 +19,7 @@ public class WorldMixin {
     // Intercept the setBlockState to detect block changes
     @Inject(method = "setBlockState", at = @At("HEAD"))
     private void onBlockChange(BlockPos pos, BlockState newState, int flags, CallbackInfoReturnable<Boolean> cir) {
-        if(ModConfig.getInstance().campfiresCanBurnOut || ModConfig.getInstance().campfiresExtinguishByRain){
+        if(ModConfig.getInstance().campfiresCanBurnOut || ModConfig.getInstance().campfiresExtinguishByRain || ModConfig.getInstance().campfiresExtinguishBySnow){
             World world = (World) (Object) this;
             BlockState oldState = world.getBlockState(pos);
 
@@ -47,7 +47,10 @@ public class WorldMixin {
             // Detect block placement (old block state is air or if the old block was snow)
             else if (!newState.isAir() && (oldState.isAir() || oldState.getBlock() == Blocks.SNOW || oldState.getBlock() == Blocks.GRASS)) {
                 if(newState.getBlock() == Blocks.CAMPFIRE) {
-                    campfiresList.put(pos, new CampfireInfo());
+                    boolean isNewCampfireLit = newState.contains(CampfireBlock.LIT) && newState.get(CampfireBlock.LIT);
+                    if(isNewCampfireLit){
+                        campfiresList.put(pos, new CampfireInfo());
+                    }
                 }
             }
         }

@@ -33,6 +33,7 @@ public class DataHandler {
     // Initialize the world data and set up file path for saving/loading
     public void initializeCampfiresData(MinecraftServer server) {
         saveFilePath = server.getSavePath(WorldSavePath.ROOT).resolve("data/campfiresList.json");
+        campfiresList.clear();
         loadCampfiresData();
     }
 
@@ -87,5 +88,7 @@ public class DataHandler {
         } catch (IOException e) {
             LOGGER.error("Failed to save campfire data", e);
         }
+
+        campfiresList.clear();
     }
 }

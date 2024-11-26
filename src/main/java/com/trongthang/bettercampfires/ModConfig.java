@@ -40,6 +40,18 @@ public class ModConfig {
     public boolean campfiresExtinguishByRain = true;
 
     @Expose
+    @SerializedName("campfires_extinguish_by_rain_time")
+    public int campfiresExtinguishByRainTime = 180;
+
+    @Expose
+    @SerializedName("campfires_extinguish_by_snow")
+    public boolean campfiresExtinguishBySnow = true;
+
+    @Expose
+    @SerializedName("campfires_extinguish_by_snow_time")
+    public int campfiresExtinguishBySnowTime = 1200;
+
+    @Expose
     @SerializedName("campfires_can_buff")
     public boolean campfiresCanBuff = true;
 

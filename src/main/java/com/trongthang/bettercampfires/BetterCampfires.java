@@ -4,19 +4,9 @@ import com.trongthang.features.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +25,7 @@ public class BetterCampfires implements ModInitializer {
 	private final CampfireBuffHandler campfireBuffHandler = new CampfireBuffHandler();
 	private final CampfireCookHandler campfireCookHandler = new CampfireCookHandler();
 	private final CampfireBurnOutHandler campfireBurnOutHandler = new CampfireBurnOutHandler();
-	private final RainExtinguishCampfireHandler rainExtinguishCampfireHandler = new RainExtinguishCampfireHandler();
+	private final RainAndSnowExtinguishCampfireHandler rainAndSnowExtinguishCampfireHandler = new RainAndSnowExtinguishCampfireHandler();
 	private final GetCampfireBurnTimeLeft getCampfireBurnTimeLeft = new GetCampfireBurnTimeLeft();
 
 	@Override
@@ -68,8 +58,8 @@ public class BetterCampfires implements ModInitializer {
 		if (ModConfig.getInstance().campfiresCanBurnOut) {
 			campfireBurnOutHandler.onServerTick(server.getOverworld());
 		}
-		if (ModConfig.getInstance().campfiresExtinguishByRain) {
-			rainExtinguishCampfireHandler.onServerTick(server.getOverworld());
+		if (ModConfig.getInstance().campfiresExtinguishByRain || ModConfig.getInstance().campfiresExtinguishBySnow) {
+			rainAndSnowExtinguishCampfireHandler.onServerTick(server.getOverworld());
 		}
 	}
 }
