@@ -25,12 +25,12 @@ public class RainAndSnowExtinguishCampfireHandler {
 
         for (BlockPos key : campfiresList.keySet()) {
             CampfireInfo campfireInfo = campfiresList.get(key);
-            
+
             BlockState state = world.getBlockState(key);
 
             boolean isRaining = world.isRaining();
 
-            if(!isRaining){
+            if (!isRaining) {
                 campfireInfo.resetRainAndSnowTime();
                 continue;
             }
@@ -39,48 +39,34 @@ public class RainAndSnowExtinguishCampfireHandler {
                 campfiresList.remove(key);
                 continue;
             }
+            if (world.isSkyVisible(key)) {
+                boolean isInNoneRainableBiomes = world.getBiome(key).value().getPrecipitation(key) == Biome.Precipitation.NONE;
 
-            //Check if there's any block above the campfire, also the current weather
-            if (state.getBlock() instanceof CampfireBlock) {
-                var checkUp = upDistance - key.getY();
-                var b = false;
+                if (!isInNoneRainableBiomes) {
+                    boolean isSnowing = world.getBiome(key).value().getPrecipitation(key) == Biome.Precipitation.SNOW;
+                    if (isSnowing && ModConfig.getInstance().campfiresExtinguishBySnow) {
+                        if (ModConfig.getInstance().campfiresExtinguishBySnowTime == 0) {
+                            Utils.extinguishCampfire(world, key, state);
+                            continue;
+                        }
+                        campfireInfo.updateInSnowTimeLeft(checkInterval);
+                        if (!campfireInfo.hasSnowTimeLeft()) {
+                            Utils.extinguishCampfire(world, key, state);
+                        }
+                    } else if (!isSnowing && ModConfig.getInstance().campfiresExtinguishByRain) {
+                        if (ModConfig.getInstance().campfiresExtinguishByRainTime == 0) {
+                            Utils.extinguishCampfire(world, key, state);
+                            continue;
+                        }
+                        campfireInfo.updateInRainTimeLeft(checkInterval);
 
-                for (int x = 1; x < checkUp; x++) {
-                    if (!world.getBlockState(key.up(x)).isAir()) {
-                        b = true;
-                        break;
-                    }
-                }
-
-                if (!b) {
-                    boolean isInNoneRainableBiomes = world.getBiome(key).value().getPrecipitation(key) == Biome.Precipitation.NONE;
-
-                    if (!isInNoneRainableBiomes) {
-                        boolean isSnowing = world.getBiome(key).value().getPrecipitation(key) == Biome.Precipitation.SNOW;
-                        if (isSnowing && ModConfig.getInstance().campfiresExtinguishBySnow) {
-                            if(ModConfig.getInstance().campfiresExtinguishBySnowTime == 0){
-                                Utils.extinguishCampfire(world, key, state);
-                                continue;
-                            }
-                            campfireInfo.updateInSnowTimeLeft(checkInterval);
-                            if (!campfireInfo.hasSnowTimeLeft()) {
-                                Utils.extinguishCampfire(world, key, state);
-                            }
-                        } else if(!isSnowing && ModConfig.getInstance().campfiresExtinguishByRain) {
-                            if(ModConfig.getInstance().campfiresExtinguishByRainTime == 0){
-                                Utils.extinguishCampfire(world, key, state);
-                                continue;
-                            }
-                            campfireInfo.updateInRainTimeLeft(checkInterval);
-
-                            if (!campfireInfo.hasRainTimeLeft()) {
-                                Utils.extinguishCampfire(world, key, state);
-                            }
+                        if (!campfireInfo.hasRainTimeLeft()) {
+                            Utils.extinguishCampfire(world, key, state);
                         }
                     }
-                } else {
-                    campfireInfo.resetRainAndSnowTime();
                 }
+            } else {
+                campfireInfo.resetRainAndSnowTime();
             }
         }
     }
