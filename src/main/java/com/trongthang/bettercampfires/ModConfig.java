@@ -23,6 +23,11 @@ public class ModConfig {
     private static final String CONFIG_FILE_NAME = "better_campfires.json";
     private static ModConfig INSTANCE;
 
+
+    @Expose
+    @SerializedName("apply_to_all_new_campfires_in_the_world_not_only_when_placed_or_broken_by_something_or_someone_PERFORMANCE_INTENSIVE")
+    public boolean applyToNewAllCampfiresInTheWorld = false;
+
     @Expose
     @SerializedName("campfires_can_burn_out")
     public boolean campfiresCanBurnOut = true;
@@ -33,7 +38,7 @@ public class ModConfig {
 
     @Expose
     @SerializedName("campfires_burn_out_time")
-    public int campfiresBurnOutTime = 7200;
+    public int campfiresBurnOutTime = 12000;
 
     @Expose
     @SerializedName("campfires_extinguish_by_rain")

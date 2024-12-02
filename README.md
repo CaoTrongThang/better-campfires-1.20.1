@@ -33,9 +33,10 @@ _After changing the config, you need to restart the game to apply new changes._
 
 ```json
 {
+  "apply_to_all_new_campfires_in_the_world_not_only_when_placed_or_broken_by_something_or_someone_PERFORMANCE_INTENSIVE": false,
   "campfires_can_burn_out": true,
   "can_check_burn_out_time_left": true,
-  "campfires_burn_out_time": 7200,
+  "campfires_burn_out_time": 12000,
   "campfires_extinguish_by_rain": true,
   "campfires_extinguish_by_rain_time": 180,
   "campfires_extinguish_by_snow": true,
