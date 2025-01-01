@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+import static com.trongthang.bettercampfires.BetterCampfires.LOGGER;
 import static com.trongthang.bettercampfires.BetterCampfires.campfiresList;
 
 public class DataHandler {

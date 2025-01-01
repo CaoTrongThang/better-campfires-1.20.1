@@ -11,7 +11,7 @@ import net.minecraft.world.biome.Biome;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.mojang.text2speech.Narrator.LOGGER;
+import static com.trongthang.bettercampfires.BetterCampfires.LOGGER;
 import static com.trongthang.bettercampfires.BetterCampfires.campfiresList;
 
 public class Utils {
