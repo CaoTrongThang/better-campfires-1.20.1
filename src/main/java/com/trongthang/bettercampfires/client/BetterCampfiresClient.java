@@ -23,7 +23,6 @@ public class BetterCampfiresClient implements ClientModInitializer  {
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(PLAY_BLOCK_LAVA_EXTINGUISH, (client, handler, buf, responseSender) -> {
             client.execute(() -> {
-                // Play sound locally
                 client.player.playSound(SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.7f, 1f);
             });
         });
