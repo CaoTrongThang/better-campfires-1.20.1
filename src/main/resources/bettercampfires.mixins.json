@@ -3,9 +3,8 @@
 	"package": "com.trongthang.bettercampfires.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ExampleMixin",
-		"WorldMixin",
-		"CampfireBlockFuel"
+		"CampfireBlockEntityMixin",
+		"CampfireBlockFuelAndLitFlint"
 	],
 	"injectors": {
 		"defaultRequire": 1

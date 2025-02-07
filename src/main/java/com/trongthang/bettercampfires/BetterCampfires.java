@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.CampfireBlockEntity;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -15,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BetterCampfires implements ModInitializer {
@@ -26,100 +30,36 @@ public class BetterCampfires implements ModInitializer {
 
     public static final Identifier PLAY_BLOCK_LAVA_EXTINGUISH = new Identifier(MOD_ID, "play_block_lava_extinguish");
 
-    public static ConcurrentHashMap<BlockPos, CampfireInfo> campfiresList = new ConcurrentHashMap<>();
-
-    private DataHandler dataHandler = new DataHandler();
-
-    private final CampfireBuffHandler campfireBuffHandler = new CampfireBuffHandler();
-    private final CampfireCookHandler campfireCookHandler = new CampfireCookHandler();
-    private final CampfireBurnOutHandler campfireBurnOutHandler = new CampfireBurnOutHandler();
-    private final RainAndSnowExtinguishCampfireHandler rainAndSnowExtinguishCampfireHandler = new RainAndSnowExtinguishCampfireHandler();
     private final GetCampfireBurnTimeLeft getCampfireBurnTimeLeft = new GetCampfireBurnTimeLeft();
+
+    public static final Map<String, StatusEffect> cachedEffects = new HashMap<>();
+
+    public void cacheEffects() {
+        ModConfig.getInstance().buffs.forEach(buff -> {
+            StatusEffect effect = Registries.STATUS_EFFECT.get(new Identifier(buff.effect));
+            if (effect != null) cachedEffects.put(buff.effect, effect);
+        });
+
+        ModConfig.getInstance().hostileMobBuffs.forEach(buff -> {
+            StatusEffect effect = Registries.STATUS_EFFECT.get(new Identifier(buff.effect));
+            if (effect != null) cachedEffects.put(buff.effect, effect);
+        });
+    }
 
     @Override
     public void onInitialize() {
 
+
         ModConfig.loadConfig();
         LOGGER.info(MOD_ID + " has been initialized!");
 
-        registerNewPlacedAndBrokenCampfiresInWorld();
-
-        ServerLifecycleEvents.SERVER_STARTING.register((t) -> {
-            dataHandler.initializeCampfiresData(t);
-        });
-
-        ServerLifecycleEvents.SERVER_STOPPING.register((t) -> {
-            dataHandler.saveCampfiresData();
-        });
-
-        ModConfig.getInstance().initializeCookableItems();
-        campfireBuffHandler.cacheEffects();
         ServerTickEvents.START_SERVER_TICK.register(this::onServerTick);
         getCampfireBurnTimeLeft.handleSendingCampfiresBurnTime();
+        cacheEffects();
     }
 
     private void onServerTick(MinecraftServer server) {
-        if (ModConfig.getInstance().campfiresCanCook) {
-            campfireCookHandler.onServerTick(server);
-        }
-        if (ModConfig.getInstance().campfiresCanBuff) {
-            campfireBuffHandler.onServerTick(server);
-        }
-        if (ModConfig.getInstance().campfiresCanBurnOut) {
-            campfireBurnOutHandler.onServerTick(server.getOverworld());
-        }
-        if (ModConfig.getInstance().campfiresExtinguishByRain || ModConfig.getInstance().campfiresExtinguishBySnow) {
-            rainAndSnowExtinguishCampfireHandler.onServerTick(server.getOverworld());
-        }
-
         Utils.onServerTick(server);
-
-        counter++;
-        if (counter < campfiresListCleanInterval) return;
-        counter = 0;
-
-        cleanUpCampfires(server);
-        if(campfiresList.size() > campfiresListCleanInterval){
-            campfiresListCleanInterval = campfiresList.size() * 3;
-        }
     }
 
-    public static void registerNewPlacedAndBrokenCampfiresInWorld() {
-
-        if(!ModConfig.getInstance().applyToNewAllCampfiresInTheWorld) return;
-
-        ServerBlockEntityEvents.BLOCK_ENTITY_LOAD.register((blockEntity, world) -> {
-            if (blockEntity instanceof CampfireBlockEntity) {
-                BlockPos pos = blockEntity.getPos();
-
-                if (!campfiresList.isEmpty()) {
-                    if (campfiresList.containsKey(pos)) {
-                        return; // Skip if not lit or already tracked
-                    }
-                }
-
-                // Create and store CampfireInfo for the newly placed campfire
-                campfiresList.put(pos, new CampfireInfo());
-            }
-        });
-
-        ServerBlockEntityEvents.BLOCK_ENTITY_UNLOAD.register((blockEntity, world) -> {
-            if (blockEntity instanceof CampfireBlockEntity) {
-                campfiresList.remove(blockEntity.getPos());
-            }
-        });
-    }
-
-    public static void cleanUpCampfires(MinecraftServer server) {
-        ServerWorld world = server.getOverworld();
-
-        for (BlockPos pos : campfiresList.keySet()) {
-            Utils.addRunAfter(() -> {
-                BlockState blockState = world.getBlockState(pos);
-                if (blockState.contains(CampfireBlock.LIT) && !blockState.get(CampfireBlock.LIT)) {
-                    campfiresList.remove(pos);
-                }
-            }, 2);
-        }
-    }
 }

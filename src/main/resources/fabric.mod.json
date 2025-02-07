@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "bettercampfires",
-	"version": "2.4.1",
+	"version": "2.4.3",
 	"name": "Better Campfires",
 "description": "Campfires now can give buffs, cook, burnt out, affected by rains, burn nearby hostile mobs...!",
 	"authors": [

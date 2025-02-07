@@ -1,9 +1,11 @@
 package com.trongthang.features;
 
-import com.trongthang.bettercampfires.CampfireInfo;
+import com.trongthang.bettercampfires.CampfireBlockEntityAccess;
 import com.trongthang.bettercampfires.ModConfig;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.CampfireBlock;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -17,7 +19,6 @@ import java.util.List;
 import java.util.Random;
 
 import static com.trongthang.bettercampfires.BetterCampfires.LOGGER;
-import static com.trongthang.bettercampfires.BetterCampfires.campfiresList;
 
 public class GetCampfireBurnTimeLeft {
 
@@ -53,15 +54,17 @@ public class GetCampfireBurnTimeLeft {
     private ActionResult onRightClickBlock(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
         // Check if the block the player right-clicked is a Campfire
         if (world.getBlockState(hitResult.getBlockPos()).getBlock() instanceof CampfireBlock) {
-            CampfireInfo campfire = campfiresList.get(hitResult.getBlockPos());
-            if (campfire != null) {
-                // Only send the message from the server side
+            BlockEntity blockEntity = world.getBlockEntity(hitResult.getBlockPos());
+            if (blockEntity instanceof CampfireBlockEntity) {
+
+                CampfireBlockEntityAccess campfireBlockEntityAccess = (CampfireBlockEntityAccess) blockEntity;
+
                 if (!world.isClient) {
                     if(player.getPose() != EntityPose.CROUCHING && player.getMainHandStack().isEmpty()){
                         counter++;
                         if((counter % 2) == 1){
                             String randomMessage = messages.get(rand.nextInt(messages.size()));
-                            String timeLeftMessage = " " + (campfire.timeLeft / 20) + "s"; // Convert to seconds
+                            String timeLeftMessage = " " + (campfireBlockEntityAccess.getBurnTime() / 20) + "s"; // Convert to seconds
 
                             Text message = Text.literal(randomMessage)
                                     .append(Text.literal(timeLeftMessage).styled(style -> style.withColor(Formatting.YELLOW)));

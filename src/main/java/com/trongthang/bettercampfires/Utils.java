@@ -12,17 +12,11 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static com.trongthang.bettercampfires.BetterCampfires.LOGGER;
-import static com.trongthang.bettercampfires.BetterCampfires.campfiresList;
 
 public class Utils {
 
     public static void log(Object s){
         LOGGER.info(String.valueOf(s));
-    }
-
-    public static void extinguishCampfire(ServerWorld world, BlockPos pos, BlockState state){
-        world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3);
-        campfiresList.remove(pos);
     }
 
     static ConcurrentHashMap<UUID, RunAfter> runnableList = new ConcurrentHashMap();
