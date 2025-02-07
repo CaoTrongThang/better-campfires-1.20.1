@@ -108,13 +108,11 @@ class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
         }
     }
 
-    // Optional: Save burn time to NBT
     @Inject(method = "writeNbt", at = @At("HEAD"))
     private void writeNbt(NbtCompound nbt, CallbackInfo ci) {
         nbt.putInt("BurnTime", this.campfireBurntime);
     }
 
-    // Optional: Load burn time from NBT
     @Inject(method = "readNbt", at = @At("HEAD"))
     private void readNbt(NbtCompound nbt, CallbackInfo ci) {
         if (nbt.contains("BurnTime")) {
