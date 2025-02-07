@@ -45,10 +45,7 @@ class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
     private static int buffCheckCooldown = ModConfig.getInstance().buffCheckInterval;
     @Unique
     private int buffCheckCooldownCounter = 0;
-    // Add a custom burn time field
 
-
-    // Injecting into the constructor of CampfireBlockEntity
     @Inject(method = "<init>", at = @At("TAIL"))
     private void onConstruct(CallbackInfo ci) {
         if (campfireBurntime == 0) {
@@ -62,7 +59,6 @@ class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
             CampfireBlockEntityMixin mixin = (CampfireBlockEntityMixin) (Object) campfire;
 
             if (ModConfig.getInstance().campfiresCanBurnOut) {
-                // Decrement burn time every tick
                 if (mixin.campfireBurntime > 0) {
                     mixin.campfireBurntime--;
                 }
