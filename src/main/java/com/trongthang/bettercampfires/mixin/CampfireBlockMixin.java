@@ -19,10 +19,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBlockMixin {
 
+
+    // start unlit
     @Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
     private void modifyPlacementState(ItemPlacementContext ctx, CallbackInfoReturnable<BlockState> cir) {
         BlockState originalState = cir.getReturnValue();
-
         if (originalState != null && ModConfig.getInstance().campfiresStartUnlit) {
             BlockState newState = originalState.with(Properties.LIT, false);
             cir.setReturnValue(newState);
