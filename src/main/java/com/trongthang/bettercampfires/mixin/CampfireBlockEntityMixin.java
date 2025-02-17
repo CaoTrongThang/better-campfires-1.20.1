@@ -36,10 +36,8 @@ import static com.mojang.text2speech.Narrator.LOGGER;
 
 @Mixin(CampfireBlockEntity.class)
 class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
-
     @Unique
     private int campfireBurntime = 0;
-
 
     private static int buffRadius = ModConfig.getInstance().buffRadius;
     private static int buffCheckCooldown = ModConfig.getInstance().buffCheckInterval;
@@ -51,13 +49,13 @@ class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
         if (campfireBurntime == 0) {
             campfireBurntime = ModConfig.getInstance().campfiresBurnOutTime;
         }
+
     }
 
     @Inject(method = "litServerTick", at = @At("HEAD"))
     private static void litServerTick(World world, BlockPos pos, BlockState state, CampfireBlockEntity campfire, CallbackInfo ci) {
         if (campfire != null) {
             CampfireBlockEntityMixin mixin = (CampfireBlockEntityMixin) (Object) campfire;
-
             if (ModConfig.getInstance().campfiresCanBurnOut) {
                 if (mixin.campfireBurntime > 0) {
                     mixin.campfireBurntime--;
@@ -69,10 +67,12 @@ class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
             }
 
             if (ModConfig.getInstance().campfiresCanBuff) {
+
                 mixin.buffCheckCooldownCounter++;
-                if (mixin.buffCheckCooldownCounter > ModConfig.getInstance().buffCheckInterval) {
+                if (mixin.buffCheckCooldownCounter > buffCheckCooldown) {
                     mixin.buffCheckCooldownCounter = 0;
                     checkAllCampfiresAndBuffEntities(pos, (ServerWorld) world);
+
                 }
             }
 
@@ -142,7 +142,6 @@ class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
                             livingEntity.setOnFireFor(6);
                         }
                     }
-
                 }
             }
         }

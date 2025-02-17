@@ -56,8 +56,9 @@ public class GetCampfireBurnTimeLeft {
         if (world.getBlockState(hitResult.getBlockPos()).getBlock() instanceof CampfireBlock) {
             BlockEntity blockEntity = world.getBlockEntity(hitResult.getBlockPos());
             if (blockEntity instanceof CampfireBlockEntity) {
-
                 CampfireBlockEntityAccess campfireBlockEntityAccess = (CampfireBlockEntityAccess) blockEntity;
+
+                if(!world.getBlockState(hitResult.getBlockPos()).get(CampfireBlock.LIT)) return ActionResult.PASS;
 
                 if (!world.isClient) {
                     if(player.getPose() != EntityPose.CROUCHING && player.getMainHandStack().isEmpty()){

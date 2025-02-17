@@ -29,6 +29,10 @@ public class ModConfig {
 //    public boolean applyToNewAllCampfiresInTheWorld = false;
 
     @Expose
+    @SerializedName("campfires_start_unlit")
+    public boolean campfiresStartUnlit = false;
+
+    @Expose
     @SerializedName("campfires_can_burn_out")
     public boolean campfiresCanBurnOut = true;
 
