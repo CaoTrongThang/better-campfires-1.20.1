@@ -16,7 +16,13 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
@@ -62,17 +68,61 @@ class CampfireBlockEntityMixin implements CampfireBlockEntityAccess {
                 }
 
                 if (mixin.campfireBurntime <= 0) {
-                    world.setBlockState(pos, state.with(net.minecraft.block.CampfireBlock.LIT, false));
+                    world.setBlockState(pos, state.with(CampfireBlock.LIT, false));
                 }
             }
 
-            if (ModConfig.getInstance().campfiresCanBuff) {
+            // Check if campfire is still lit after decrementing burn time
+            BlockState currentState = world.getBlockState(pos);
+            if (!currentState.get(CampfireBlock.LIT)) {
+                return;
+            }
 
+            // Process item entities for fuel
+            if (!ModConfig.getInstance().campfireFuels.isEmpty() && ModConfig.getInstance().campfiresCanBurnOut) {
+                Box box = new Box(pos);
+                List<ItemEntity> itemEntities = world.getEntitiesByClass(ItemEntity.class, box, Entity::isAlive);
+
+                for (ItemEntity itemEntity : itemEntities) {
+                    ItemStack stack = itemEntity.getStack();
+                    Item item = stack.getItem();
+                    Identifier itemId = Registries.ITEM.getId(item);
+                    String itemIdString = itemId.toString();
+
+                    for (ModConfig.CampfireFuels fuel : ModConfig.getInstance().campfireFuels) {
+                        String fuelId = fuel.fuelId;
+                        boolean matches = false;
+
+                        if (fuelId.startsWith("#")) {
+                            String tagName = fuelId.substring(1);
+                            Identifier tagIdentifier = new Identifier(tagName);
+                            TagKey<Item> tagKey = TagKey.of(RegistryKeys.ITEM, tagIdentifier);
+                            if (stack.isIn(tagKey)) {
+                                matches = true;
+                            }
+                        } else {
+                            if (itemIdString.equals(fuelId)) {
+                                matches = true;
+                            }
+                        }
+
+                        if (matches) {
+                            int fuelToAdd = fuel.addBurnTime * stack.getCount();
+                            mixin.campfireBurntime += fuelToAdd;
+                            itemEntity.discard();
+                            world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 1.0f);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Existing code for buffs and rain/snow checks
+            if (ModConfig.getInstance().campfiresCanBuff) {
                 mixin.buffCheckCooldownCounter++;
                 if (mixin.buffCheckCooldownCounter > buffCheckCooldown) {
                     mixin.buffCheckCooldownCounter = 0;
                     checkAllCampfiresAndBuffEntities(pos, (ServerWorld) world);
-
                 }
             }
 
